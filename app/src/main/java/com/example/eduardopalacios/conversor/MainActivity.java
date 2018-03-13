@@ -17,6 +17,7 @@ import android.widget.Toast;
 import com.example.eduardopalacios.conversor.Adapters.Adapter;
 import com.example.eduardopalacios.conversor.Clases.Item;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -200,13 +201,32 @@ public class MainActivity extends AppCompatActivity {
 
     public void Operacion(Double valorMoneda)
     {
+        boolean comprobandoParsing=false;
         if (cantidad.length()>0)
         {
-            cantidadEditText=Double.parseDouble(cantidad.getText().toString());
 
-            resultado=valorMoneda*cantidadEditText;
+            //Comprobando si la cantidad es numerica.
+            try {
+                //Ejecuta el try cuando se realizo correctamente la conversion
+                cantidadEditText=Double.parseDouble(cantidad.getText().toString());
+                comprobandoParsing=true;
 
-            Toast.makeText(getApplicationContext(),String.valueOf(resultado),Toast.LENGTH_SHORT).show();
+            }catch (Exception e)
+            {
+                //Ejecuta el catch cuando no se realizo correctamente la conversion
+                e.printStackTrace();
+                comprobandoParsing=false;
+            }
+
+            if (comprobandoParsing)
+            {
+                resultado=valorMoneda*cantidadEditText;
+                Toast.makeText(getApplicationContext(),String.valueOf(resultado),Toast.LENGTH_SHORT).show();
+            }
+            else {
+                Toast.makeText(getApplicationContext(),"Conversion fallida",Toast.LENGTH_SHORT).show();
+            }
+
         }
         else {
             Toast.makeText(getApplicationContext(),"campo vacio",Toast.LENGTH_SHORT).show();
