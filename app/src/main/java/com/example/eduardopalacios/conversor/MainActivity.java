@@ -1,9 +1,13 @@
 package com.example.eduardopalacios.conversor;
 
+import android.content.Context;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -17,14 +21,15 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    Spinner spinner,spinner2;
+    Spinner spinner,spinner2,spinner3;
     TextView cantidad;
     Button aceptar;
+    Context context=this;
     List<Item> items=new ArrayList<Item>();
     Adapter adapter;
     Double cantidadTextview,resultado;
     String item1;
-    String item2 ;
+    String item2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,7 +50,8 @@ public class MainActivity extends AppCompatActivity {
         
 
         adapter=new Adapter(this,R.layout.spinnerdesign,items);
-        
+
+
 
         spinner.setAdapter(adapter);
 
@@ -53,6 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
         OnItemSelected(spinner);
         OnItemSelected(spinner2);
+
 
 
 
@@ -66,11 +73,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
-
                 if (spinner.getId()==R.id.spiner)
                 {
 
+
                     item1=items.get(i).getTitulo();
+
+                    Toast.makeText(getApplicationContext(),String.valueOf(i),Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -87,7 +96,12 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-                Toast.makeText(getApplicationContext(),"Nada seleccionado",Toast.LENGTH_SHORT).show();
+
+                if (spinner.getId()==R.id.spiner2)
+                {
+                    Toast.makeText(getApplicationContext(),"Nada seleccionado",Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         });
@@ -199,4 +213,6 @@ public class MainActivity extends AppCompatActivity {
 
         Toast.makeText(getApplicationContext(),String.valueOf(resultado),Toast.LENGTH_SHORT).show();
     }
+
+
 }
