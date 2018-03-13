@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -22,12 +23,12 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
 
     Spinner spinner,spinner2,spinner3;
-    TextView cantidad;
+    EditText cantidad;
     Button aceptar;
     Context context=this;
     List<Item> items=new ArrayList<Item>();
     Adapter adapter;
-    Double cantidadTextview,resultado;
+    Double cantidadEditText,resultado;
     String item1;
     String item2;
 
@@ -39,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
 
         spinner=(Spinner)findViewById(R.id.spiner);
         spinner2=(Spinner)findViewById(R.id.spiner2);
-        cantidad=(TextView) findViewById(R.id.cantidad);
+        cantidad=(EditText) findViewById(R.id.cantidad);
         aceptar=(Button)findViewById(R.id.aceptar);
 
 
@@ -76,11 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 if (spinner.getId()==R.id.spiner)
                 {
 
-
-                    ///
                     item1=items.get(i).getTitulo();
-
-                    Toast.makeText(getApplicationContext(),String.valueOf(i),Toast.LENGTH_SHORT).show();
 
                 }
 
@@ -97,12 +94,6 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
-
-                if (spinner.getId()==R.id.spiner2)
-                {
-                    Toast.makeText(getApplicationContext(),"Nada seleccionado",Toast.LENGTH_SHORT).show();
-                }
-
 
             }
         });
@@ -209,10 +200,18 @@ public class MainActivity extends AppCompatActivity {
 
     public void Operacion(Double valorMoneda)
     {
-        cantidadTextview=Double.parseDouble(cantidad.getText().toString());
-        resultado=valorMoneda*cantidadTextview;
+        if (cantidad.length()>0)
+        {
+            cantidadEditText=Double.parseDouble(cantidad.getText().toString());
 
-        Toast.makeText(getApplicationContext(),String.valueOf(resultado),Toast.LENGTH_SHORT).show();
+            resultado=valorMoneda*cantidadEditText;
+
+            Toast.makeText(getApplicationContext(),String.valueOf(resultado),Toast.LENGTH_SHORT).show();
+        }
+        else {
+            Toast.makeText(getApplicationContext(),"campo vacio",Toast.LENGTH_SHORT).show();
+        }
+
     }
 
 
