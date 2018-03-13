@@ -77,6 +77,7 @@ public class MainActivity extends AppCompatActivity {
                 {
 
 
+                    ///
                     item1=items.get(i).getTitulo();
 
                     Toast.makeText(getApplicationContext(),String.valueOf(i),Toast.LENGTH_SHORT).show();
